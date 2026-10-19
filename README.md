@@ -1,4 +1,5 @@
-# Lantern Stay – BA/QA practice (team)
+# Lantern Stay – practice by Tram
+
 Fictional client for the AI Tools training. Training data only – no real client data.
 
 ## Client rules for the booking form
