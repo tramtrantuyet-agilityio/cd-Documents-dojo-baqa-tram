@@ -18,3 +18,5 @@ Fictional client for the AI Tools training. Training data only – no real clien
 * notes/    personal notes, decision docs# cd-Documents-dojo-baqa-tram
 
 Status: LS-101 in review
+
+Status: waiting for client
