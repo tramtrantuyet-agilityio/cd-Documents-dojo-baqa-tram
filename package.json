@@ -1,0 +1,27 @@
+{
+  "name": "cd-documents-dojo-baqa-tram",
+  "version": "1.0.0",
+  "description": "Fictional client for the AI Tools training. Training data only – no real client data.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tramtrantuyet-agilityio/cd-Documents-dojo-baqa-tram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tramtrantuyet-agilityio/cd-Documents-dojo-baqa-tram/issues"
+  },
+  "homepage": "https://github.com/tramtrantuyet-agilityio/cd-Documents-dojo-baqa-tram#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "http-server": "^14.1.1"
+  }
+}
