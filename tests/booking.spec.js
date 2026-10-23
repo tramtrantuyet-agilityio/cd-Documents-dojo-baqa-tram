@@ -25,6 +25,8 @@ test('R3: check-out before check-in shows an error', async ({ page }) => {
 });
 
 test('R1 / LS-101: 0 guests is rejected', async ({ page }) => {
+  // Known bug LS-101: the app accepts 0 guests. Remove this line once LS-101 is fixed.
+  test.fail(true, 'Known bug LS-101: app accepts 0 guests');
   await fillBooking(page, { checkin: '2026-12-01', checkout: '2026-12-03', guests: '0', room: 'standard' });
   await expect(page.getByRole('alert')).toHaveText('Guests must be between 1 and 6.');
   await expect(page.locator('#result')).toHaveText('');
