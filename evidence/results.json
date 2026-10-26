@@ -1,0 +1,72 @@
+[
+  {
+    "id": "LS-101-1",
+    "desc": "0 guests",
+    "exp": "Error: Guests must be between 1 and 6.",
+    "actual": "Error: Guests must be between 1 and 6.",
+    "res": "Pass"
+  },
+  {
+    "id": "LS-101-2",
+    "desc": "1 guest",
+    "exp": "2 night(s) · Total 1,200,000 VND",
+    "actual": "2 night(s) · Total 1,200,000 VND",
+    "res": "Pass"
+  },
+  {
+    "id": "LS-101-3",
+    "desc": "6 guests",
+    "exp": "2 night(s) · Total 1,200,000 VND",
+    "actual": "2 night(s) · Total 1,200,000 VND",
+    "res": "Pass"
+  },
+  {
+    "id": "LS-101-4",
+    "desc": "7 guests",
+    "exp": "Error: Guests must be between 1 and 6.",
+    "actual": "Error: Guests must be between 1 and 6.",
+    "res": "Pass"
+  },
+  {
+    "id": "LS-202-1",
+    "desc": "2 nights Std, no discount",
+    "exp": "2 night(s) · Total 1,200,000 VND",
+    "actual": "2 night(s) · Total 1,200,000 VND",
+    "res": "Pass"
+  },
+  {
+    "id": "LS-202-2",
+    "desc": "3 nights Std",
+    "exp": "3 night(s) · Total 1,620,000 VND (10% long-stay discount)",
+    "actual": "3 night(s) · Total 1,800,000 VND",
+    "res": "Fail"
+  },
+  {
+    "id": "LS-202-3",
+    "desc": "4 nights Deluxe",
+    "exp": "4 night(s) · Total 3,240,000 VND (10% long-stay discount)",
+    "actual": "4 night(s) · Total 3,600,000 VND",
+    "res": "Fail"
+  },
+  {
+    "id": "LS-202-4",
+    "desc": "3 nights Deluxe 6 guests",
+    "exp": "3 night(s) · Total 2,430,000 VND (10% long-stay discount)",
+    "actual": "3 night(s) · Total 2,700,000 VND",
+    "res": "Fail"
+  },
+  {
+    "id": "LS-202-5",
+    "desc": "Nov 29 -> Dec 2",
+    "exp": "3 night(s) · Total 1,620,000 VND (10% long-stay discount)",
+    "actual": "3 night(s) · Total 1,800,000 VND",
+    "res": "Fail"
+  },
+  {
+    "id": "LS-202-6",
+    "desc": "same-day",
+    "exp": "Error: Check-out must be after check-in.",
+    "actual": "Error: Check-out must be after check-in.",
+    "res": "Pass"
+  }
+]
