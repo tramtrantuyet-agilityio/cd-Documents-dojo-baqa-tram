@@ -18,8 +18,6 @@ async function checkPrice(page, guests) {
 }
 
 test('LS-101: 0 guests shows the guests error and no price', async ({ page }) => {
-  // Known bug LS-101: the app accepts 0 guests. Remove this line once LS-101 is fixed.
-  test.fail(true, 'Known bug LS-101: app accepts 0 guests');
   await checkPrice(page, '0');
   await expect(page.getByRole('alert')).toHaveText(GUESTS_ERROR);
   await expect(page.getByText(/Total .* VND/)).toHaveCount(0);
