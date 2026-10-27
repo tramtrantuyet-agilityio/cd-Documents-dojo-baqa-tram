@@ -15,7 +15,7 @@ so that I can book for the whole group in one go.
 - AC4 Given 2 Standard rooms for 3 nights,
       Then the long-stay discount applies to each room: 3,240,000 VND.
 
-**Scope**: price check for 1–3 rooms, mixed types, guests per room 1–6.
+**Scope**: price check for 1–3 rooms, mixed types, guests per room 1–6, one shared check-in and check-out date for all rooms.
 **Non-scope**: payment, partial availability, group discount.
 
 **Open questions**: see Issue #31.
@@ -23,3 +23,8 @@ so that I can book for the whole group in one go.
 ## Decisions
 - 2026-10-29 · Max 3 rooms per group booking (client, Issue #31)
 - 2026-10-29 · Long-stay discount applies per room (client, Issue #33)
+- 2026-10-27 · All rooms in one group booking share the same check-in and check-out dates (client)
+- 2026-10-27 · Inventory is 12 rooms: 8 Standard, 4 Deluxe (client)
+- 2026-10-27 · When only some rooms are free, hold them for 15 minutes while the user decides; release automatically if not confirmed (client; partial availability is out of scope for LS-301)
+- 2026-10-27 · Error and notice wording must be clear, friendly and say what to do next, with no technical jargon (client)
+- 2026-10-27 · Group payment, when built, is one payment for the full amount of all rooms, not a deposit (client; payment is out of scope for LS-301)
