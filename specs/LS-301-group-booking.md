@@ -21,10 +21,6 @@ so that I can book for the whole group in one go.
 **Open questions**: see Issue #31.
 
 ## Decisions
-- 2026-10-29 · Max 3 rooms per group booking (client, Issue #31)
-- 2026-10-29 · Long-stay discount applies per room (client, Issue #33)
-- 2026-10-27 · All rooms in one group booking share the same check-in and check-out dates (client)
-- 2026-10-27 · Inventory is 12 rooms: 8 Standard, 4 Deluxe (client)
-- 2026-10-27 · When only some rooms are free, hold them for 15 minutes while the user decides; release automatically if not confirmed (client; partial availability is out of scope for LS-301)
-- 2026-10-27 · Error and notice wording must be clear, friendly and say what to do next, with no technical jargon (client)
-- 2026-10-27 · Group payment, when built, is one payment for the full amount of all rooms, not a deposit (client; payment is out of scope for LS-301)
+- 2026-10-29 · Maximum 3 rooms per booking (client, Issue #31)
+- 2026-10-29 · Long-stay discount applies to each room (client, Issue #31)
+- 2026-10-30 · Mixed room types allowed (client, Issue #33)
