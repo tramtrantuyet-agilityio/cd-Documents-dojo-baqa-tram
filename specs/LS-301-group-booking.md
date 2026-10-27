@@ -15,7 +15,7 @@ so that I can book for the whole group in one go.
 - AC4 Given 2 Standard rooms for 3 nights,
       Then the long-stay discount applies to each room: 3,240,000 VND.
 
-**Scope**: price check for 1–3 rooms, mixed types, guests per room 1–6.
+**Scope**: price check for 1–3 rooms, mixed types, guests per room 1–6, one shared check-in and check-out date for all rooms.
 **Non-scope**: payment, partial availability, group discount.
 
 **Open questions**: see Issue #31.
