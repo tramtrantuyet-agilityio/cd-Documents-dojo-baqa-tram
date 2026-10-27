@@ -21,4 +21,5 @@ so that I can book for the whole group in one go.
 **Open questions**: see Issue #31.
 
 ## Decisions
-- (add dated decisions here as the client answers)
+- 2026-10-29 · Max 3 rooms per group booking (client, Issue #31)
+- 2026-10-29 · Long-stay discount applies per room (client, Issue #33)
