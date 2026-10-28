@@ -1,29 +1,48 @@
 // tests/group-booking.spec.js
+// LS-301: group booking, up to 3 rooms (specs/LS-301-group-booking.md)
 const { test, expect } = require('@playwright/test');
 
-// LS-301 is not built yet: each test is "fixme" (skipped, listed as a to-do).
-// When the dev PR for a criterion merges, change test.fixme( to test( and fill in the steps.
-
-test.fixme('LS-301 AC1: 2 Standard rooms for 2 nights cost 2,400,000 VND', async ({ page }) => {
+test.beforeEach(async ({ page }) => {
   await page.goto('/');
-  // add 2 Standard rooms, dates 2026-12-01 → 2026-12-03, click "Check price"
+});
+
+async function setDates(page, checkin, checkout) {
+  await page.getByLabel('Check-in').fill(checkin);
+  await page.getByLabel('Check-out').fill(checkout);
+}
+
+// Rooms 2 and 3 are labelled "Room 2" / "Room 3"; room 1 is just "Room".
+async function addRooms(page, types) {
+  for (const [i, type] of types.entries()) {
+    await page.getByRole('button', { name: 'Add room' }).click();
+    await page.getByLabel(`Room ${i + 2}`, { exact: true }).selectOption(type);
+  }
+}
+
+test('LS-301 AC1: 2 Standard rooms for 2 nights cost 2,400,000 VND', async ({ page }) => {
+  await setDates(page, '2026-12-01', '2026-12-03');
+  await addRooms(page, ['standard']);
+  await page.getByRole('button', { name: 'Check price' }).click();
   await expect(page.locator('#result')).toHaveText('2 rooms · 2 night(s) · Total 2,400,000 VND');
 });
 
-test.fixme('LS-301 AC2: Standard + Deluxe for 2 nights cost 3,000,000 VND', async ({ page }) => {
-  await page.goto('/');
-  // add 1 Standard + 1 Deluxe room, dates 2026-12-01 → 2026-12-03, click "Check price"
+test('LS-301 AC2: Standard + Deluxe for 2 nights cost 3,000,000 VND', async ({ page }) => {
+  await setDates(page, '2026-12-01', '2026-12-03');
+  await addRooms(page, ['deluxe']);
+  await page.getByRole('button', { name: 'Check price' }).click();
   await expect(page.locator('#result')).toContainText('Total 3,000,000 VND');
 });
 
-test.fixme('LS-301 AC3: a 4th room shows the 3-room limit message', async ({ page }) => {
-  await page.goto('/');
-  // add 3 rooms, then try to add a 4th
+test('LS-301 AC3: a 4th room shows the 3-room limit message', async ({ page }) => {
+  await addRooms(page, ['standard', 'standard']);
+  await page.getByRole('button', { name: 'Add room' }).click();
   await expect(page.getByRole('alert')).toHaveText('You can book up to 3 rooms at once.');
+  await expect(page.getByLabel('Room 4', { exact: true })).toHaveCount(0);
 });
 
-test.fixme('LS-301 AC4: discount applies per room – 3,240,000 VND', async ({ page }) => {
-  await page.goto('/');
-  // add 2 Standard rooms, dates 2026-12-01 → 2026-12-04 (3 nights), click "Check price"
+test('LS-301 AC4: discount applies per room – 3,240,000 VND', async ({ page }) => {
+  await setDates(page, '2026-12-01', '2026-12-04');
+  await addRooms(page, ['standard']);
+  await page.getByRole('button', { name: 'Check price' }).click();
   await expect(page.locator('#result')).toContainText('Total 3,240,000 VND');
 });
