@@ -49,7 +49,7 @@ Two charters, run as a scripted Playwright session, not a manual hour. Findings 
 
 | # | Finding | Severity | Notes |
 |---|---------|----------|-------|
-| 1 | Price stays on screen after rooms or room types change | Medium | The total shown no longer matches the form. Suggest clearing `#result` when the form changes or a room is added. |
+| 1 | Price stays on screen after rooms or room types change | Medium | **Fixed** in the same branch: the price clears when the form changes or a room is added. Covered by a new test in `group-booking.spec.js`. |
 | 2 | Guests error does not name the room | Low | Suggest "Room 2: Guests must be between 1 and 6." |
 | 3 | No way to remove a room | Low | Not in the spec; needs a BA decision (Issue #31 area). |
 | 4 | No maximum stay length | Question | Spec silent. 365 nights prices normally. |
