@@ -44,8 +44,13 @@
     const result = document.getElementById('result');
     const rooms = document.getElementById('rooms');
 
+    // A price on screen is only valid for the form it was calculated from.
+    const form = document.getElementById('booking');
+    ['input', 'change'].forEach((type) => form.addEventListener(type, () => { result.textContent = ''; }));
+
     document.getElementById('add-room').addEventListener('click', () => {
       error.textContent = '';
+      result.textContent = '';
       const rows = rooms.querySelectorAll('.room-row');
       if (rows.length >= MAX_ROOMS) {
         error.textContent = 'You can book up to 3 rooms at once.';
