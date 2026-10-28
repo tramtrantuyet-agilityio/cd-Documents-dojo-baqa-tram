@@ -9,6 +9,7 @@
     input, select, button { width: 100%; padding: 8px; margin-top: 4px; }
     #error { color: #b00020; }
     #result { font-weight: bold; }
+    .room-row { border-top: 1px solid #ddd; margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -18,13 +19,18 @@
     <input id="checkin" type="date" required>
     <label for="checkout">Check-out</label>
     <input id="checkout" type="date" required>
-    <label for="guests">Guests</label>
-    <input id="guests" type="number" value="2">
-    <label for="room">Room</label>
-    <select id="room">
-      <option value="standard">Standard – 600,000 VND/night</option>
-      <option value="deluxe">Deluxe – 900,000 VND/night</option>
-    </select>
+    <div id="rooms">
+      <div class="room-row">
+        <label for="guests">Guests</label>
+        <input id="guests" class="guests" type="number" value="2">
+        <label for="room">Room</label>
+        <select id="room" class="room">
+          <option value="standard">Standard – 600,000 VND/night</option>
+          <option value="deluxe">Deluxe – 900,000 VND/night</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" id="add-room">Add room</button>
     <button type="submit">Check price</button>
   </form>
   <p id="error" role="alert"></p>
@@ -32,20 +38,52 @@
 
   <script>
     const RATES = { standard: 600000, deluxe: 900000 };
+    const MAX_ROOMS = 3;
+    const LONG_STAY_NIGHTS = 3;
+    const error = document.getElementById('error');
+    const result = document.getElementById('result');
+    const rooms = document.getElementById('rooms');
+
+    document.getElementById('add-room').addEventListener('click', () => {
+      error.textContent = '';
+      const rows = rooms.querySelectorAll('.room-row');
+      if (rows.length >= MAX_ROOMS) {
+        error.textContent = 'You can book up to 3 rooms at once.';
+        return;
+      }
+      const n = rows.length + 1;
+      const row = rows[0].cloneNode(true);
+      row.querySelectorAll('label').forEach((label) => {
+        const isGuests = label.textContent.startsWith('Guests');
+        label.htmlFor = (isGuests ? 'guests-' : 'room-') + n;
+        label.textContent = (isGuests ? 'Guests ' : 'Room ') + n;
+      });
+      row.querySelector('.guests').id = 'guests-' + n;
+      row.querySelector('.room').id = 'room-' + n;
+      rooms.appendChild(row);
+    });
+
     document.getElementById('booking').addEventListener('submit', (e) => {
       e.preventDefault();
-      const error = document.getElementById('error');
-      const result = document.getElementById('result');
       error.textContent = '';
       result.textContent = '';
       const inDate = new Date(document.getElementById('checkin').value);
       const outDate = new Date(document.getElementById('checkout').value);
-      const guests = Number(document.getElementById('guests').value);
       const nights = Math.round((outDate - inDate) / 86400000);
       if (!(nights > 0)) { error.textContent = 'Check-out must be after check-in.'; return; }
-      if (guests < 1 || guests > 6) { error.textContent = 'Guests must be between 1 and 6.'; return; }
-      const total = nights * RATES[document.getElementById('room').value];
-      result.textContent = nights + ' night(s) · Total ' + total.toLocaleString('en-US') + ' VND';
+      const rows = [...rooms.querySelectorAll('.room-row')];
+      for (const row of rows) {
+        const guests = Number(row.querySelector('.guests').value);
+        if (guests < 1 || guests > 6) { error.textContent = 'Guests must be between 1 and 6.'; return; }
+      }
+      const discounted = nights >= LONG_STAY_NIGHTS;
+      const total = rows.reduce((sum, row) => {
+        const price = nights * RATES[row.querySelector('.room').value];
+        return sum + (discounted ? Math.round(price * 0.9) : price);
+      }, 0);
+      const prefix = rows.length > 1 ? rows.length + ' rooms · ' : '';
+      result.textContent = prefix + nights + ' night(s) · Total ' + total.toLocaleString('en-US') + ' VND'
+        + (discounted ? ' (10% long-stay discount)' : '');
     });
   </script>
 </body>
